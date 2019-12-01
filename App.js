@@ -29,9 +29,8 @@ export default class App extends React.Component {
         });
       }
     );
-    console.log('did update')
   }
-  // lat=37.773972, lon=-122.431297
+
   fetchWeather(lat, lon) {
     fetch(
       `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}&units=metric`
