@@ -34,15 +34,20 @@ const Weather = ({ weather, temperature}) => {
   );
 };
 
+Weather.PropTypes = {
+	temperature: PropTypes.number.isRequired,
+	weather: PropTypes.string
+}
+
 const styles = StyleSheet.create({
   weatherContainer: {
     flex: 1,
-    backgroundColor: '#f7b733'
   },
   headerContainer: {
-    flex: 1,
+		flex: 1,
+		flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-around'
   },
   bodyContainer: {
     flex: 2,
@@ -52,15 +57,15 @@ const styles = StyleSheet.create({
     marginBottom: 40
   },
   tempText: {
-    fontSize: 48,
+    fontSize: 72,
     color: '#fff'
 	},
 	title: {
-    fontSize: 48,
+    fontSize: 60,
     color: '#fff'
 	},
 	subtitle: {
-    fontSize: 28,
+    fontSize: 48,
     color: '#fff'
   }
 });
