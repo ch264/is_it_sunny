@@ -12,3 +12,7 @@ web-report/
 
 # macOS
 .DS_Store
+
+# keys
+./utils/WeatherAPIKey.js
+WeatherAPIKey.js
