@@ -1,18 +1,34 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { weatherConditions } from '../utils/WeatherConditions';
+// import proptypes for props coming from app.js
+import PropTypes from 'prop-types';
 
 // receive props from app.js state
 const Weather = ({ weather, temperature}) => {
   return (
-    <View style={styles.weatherContainer}>
-      <View style={styles.headerContainer}>
-        <MaterialCommunityIcons size={48} name="weather-sunny" color={'#fff'} />
-        <Text style={styles.tempText}>{temperature}</Text>
-      </View>
-      <View style={styles.bodyContainer}>
-        <Text style={styles.title}>{weather}</Text>
-        <Text style={styles.subtitle}>Here comes the sun</Text>
+    <View 
+		style={[
+			styles.weatherContainer,
+			{backgroundColor:weatherConditions[weather].color}
+			]}
+		>
+		<View style={styles.headerContainer}>
+			<MaterialCommunityIcons 
+				size={48} 
+				name="weather-sunny" 
+				color={'#fff'}
+			/>
+			<Text style={styles.tempText}>{temperature}˚</Text>
+		</View>
+		<View style={styles.bodyContainer}>
+			<Text style={styles.title}>
+				{weatherConditions[weather].title}
+			</Text>
+			<Text style={styles.subtitle}>
+				{weatherConditions[weather].subtitle}
+			</Text>
     </View>
   </View>
   );
