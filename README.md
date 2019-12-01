@@ -1,4 +1,4 @@
-# is_it_sunny
+# Is It Sunny?
 
 ## Techstack
 * React Native
