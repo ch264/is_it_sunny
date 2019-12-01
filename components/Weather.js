@@ -37,5 +37,15 @@ const styles = StyleSheet.create({
   tempText: {
     fontSize: 48,
     color: '#fff'
-  },
+	},
+	title: {
+    fontSize: 48,
+    color: '#fff'
+	},
+	subtitle: {
+    fontSize: 28,
+    color: '#fff'
+  }
 });
+
+export default Weather;
