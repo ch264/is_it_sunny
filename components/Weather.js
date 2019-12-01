@@ -3,15 +3,17 @@ import { View, Text, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { weatherConditions } from '../utils/WeatherConditions';
 // import proptypes for props coming from app.js
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 // receive props from app.js state
 const Weather = ({ weather, temperature}) => {
+	console.log('weather:', weather)
+	if(weather != null) {
   return (
     <View 
 		style={[
 			styles.weatherContainer,
-			{backgroundColor:weatherConditions[weather].color}
+			{ backgroundColor: weatherConditions[weather].color }
 			]}
 		>
 		<View style={styles.headerContainer}>
@@ -32,11 +34,18 @@ const Weather = ({ weather, temperature}) => {
     </View>
   </View>
   );
+} else {
+	return (
+		<View>
+			<Text>not working</Text>
+		</View>
+	)
+};
 };
 
-Weather.PropTypes = {
-	temperature: PropTypes.number.isRequired,
-	weather: PropTypes.string
+Weather.propTypes = {
+	temperature: propTypes.number.isRequired,
+	weather: propTypes.string
 }
 
 const styles = StyleSheet.create({
@@ -65,7 +74,7 @@ const styles = StyleSheet.create({
     color: '#fff'
 	},
 	subtitle: {
-    fontSize: 48,
+    fontSize: 24,
     color: '#fff'
   }
 });

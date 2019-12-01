@@ -1,4 +1,7 @@
 import React from 'react';
+// import { DangerZone } from 'expo';
+// const { Lottie } = DangerZone;
+
 import { StyleSheet, Text, View, Animated } from 'react-native';
 
 import { API_KEY } from './utils/WeatherKeys';
@@ -15,7 +18,7 @@ export default class App extends React.Component {
     error: null
   }
 
-  componentDidMount() {
+  componentDidMount(lat=37.773972, lon=-122.431297) {
     navigator.geolocation.getCurrentPosition(
       position => {
         this.fetchWeather(position.coords.latitude, position.coords.longitude);
@@ -26,9 +29,10 @@ export default class App extends React.Component {
         });
       }
     );
+    console.log('did update')
   }
-
-  fetchWeather(lat = 25, lon = 25) {
+  // lat=37.773972, lon=-122.431297
+  fetchWeather(lat, lon) {
     fetch(
       `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}&units=metric`
     )
@@ -40,15 +44,46 @@ export default class App extends React.Component {
         temperature: json.main.temp,
         weatherCondition: json.weather[0].main,
         isLoading: false
-      })
+      });
+
     });
   }
 
+  // fetchWeather (lat, lon) {
+  //   fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}&units=metric`, {
+  //     method: 'GET'
+  //     // mode: 'no-cors'
+  //   })
+  //   .then(function(response) {
+  //     if (!response.ok) {
+  //       throw Error(response.statusText);
+  //     }
+  //     // read the response body as json
+  //     return response.json();
+  //   })
+  //   .then(function(responseJson) {
+  //     // do stuff with json
+  //     alert(JSON.stringify(responseJson));
+  //     console.log(responseJson);
+  //   })
+  //   .catch(function(error) {
+  //     console.log('we have a problem: ', error);
+  //   });
+  // }
+
   render() {
-    const { isLoading } = this.state;
+    const { isLoading, weatherCondition, temperature } = this.state;
     return (
       <View style={styles.container}>
-        {isLoading ? <Text>Fetching The Weather</Text> : <Weather weather={weatherCondition} temperature={temperature} />}
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <Text style={styles.loadingText}>
+              Fetching The Weather
+            </Text>
+          </View> 
+        ) : ( 
+          <Weather weather={weatherCondition} temperature={temperature} />
+        )}
       </View>
     );
   }
@@ -61,4 +96,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFDE4'
+  },
+  loadingText: {
+    fontSize: 30
+  }
 });
